@@ -3,10 +3,10 @@
     --golden-yellow: #E0AF4E; /* R:224, G:175, B:78 */
     --off-white: #F5F7F7; /* R:245, G:247, B:247 */
     --mint-green: #04BFA9; /* R:4, G:191, B:169 - for potential accents */
-    --social-icon-blue: #4A90E2; /* A clear blue for social icons, similar to image */
+    /* --social-icon-blue: #4A90E2; */ /* REMOVED - No longer needed */
 
-    --font-primary: 'Montserrat', sans-serif; /* For Logotype, maybe headings */
-    --font-secondary: 'Exo 2', sans-serif; /* For body text */
+    --font-primary: 'Montserrat', sans-serif;
+    --font-secondary: 'Exo 2', sans-serif;
 }
 
 * {
@@ -147,14 +147,14 @@ header .logo {
 }
 
 .social-links-main a {
-    /* --- Updated to match image --- */
-    color: var(--social-icon-blue); /* Blue color for icons as in the image */
-    font-size: 1.3rem; /* Smaller icons to match image */
+    /* --- Updated to match image (white icons) --- */
+    color: var(--off-white); /* CHANGED from --social-icon-blue to --off-white */
+    font-size: 1.3rem;
     transition: color 0.3s ease, transform 0.2s ease;
 }
 
 .social-links-main a:hover {
-    color: #3a7bc8; /* Slightly darker blue on hover */
+    color: var(--golden-yellow); /* CHANGED hover to golden yellow for brand consistency */
     transform: scale(1.1);
 }
 
