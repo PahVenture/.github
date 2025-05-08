@@ -76,9 +76,8 @@ body::before {
 }
 
 header .logo {
-    max-width: 250px;
-    margin-bottom: 30px;
-    height: auto;
+    max-width: 500px;
+    height: 250px;
 }
 
 .hero h1 {
