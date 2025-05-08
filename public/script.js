@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // --- Countdown Timer ---
     // Set the date we're counting down to
     // Example: December 31, 2024 23:59:59
-    const countDownDate = new Date("Dec 31, 2024 23:59:59").getTime();
+    const countDownDate = new Date("Dec 19, 2024 16:59:59").getTime();
 
     const countdownFunction = setInterval(function() {
         const now = new Date().getTime();
