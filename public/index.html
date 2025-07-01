@@ -1,65 +1,398 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" class="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pah Venture - Próximamente</title>
-    <link rel="icon" href="favicon.png" type="image/png"> <!-- Adjusted path -->
+    <title>Pah Venture | Asistente IA</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Exo+2:wght@300;400;600&display=swap" rel="stylesheet">
-
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Marked.js for Markdown Rendering -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    
     <!-- Font Awesome for Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
-    <link rel="stylesheet" href="style.css">
+    <style>
+        :root {
+            --bg-dark: #011414;
+            --bg-glass: rgba(10, 25, 25, 0.5);
+            --border-color: rgba(4, 191, 169, 0.2);
+            --brand-teal: #04BFA9;
+            --brand-teal-glow: rgba(4, 191, 169, 0.4);
+            --text-light: #F5F7F7;
+            --text-muted: #a0b3b0;
+            --font-primary: 'Exo 2', sans-serif;
+        }
+
+        * {
+            user-select: none;
+        }
+
+        body {
+            font-family: var(--font-primary);
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            background-image: linear-gradient(-45deg, #011414, #012323, #044a42, #011414);
+            background-size: 400% 400%;
+            animation: gradientBG 20s ease infinite;
+            overflow: hidden;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .custom-scrollbar::-webkit-scrollbar { width: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: var(--brand-teal); border-radius: 10px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: #03a08d; }
+
+        @keyframes slideInLeft { from { opacity: 0; transform: translateX(-20px); } to { opacity: 1; transform: translateX(0); } }
+        @keyframes slideInRight { from { opacity: 0; transform: translateX(20px); } to { opacity: 1; transform: translateX(0); } }
+        .animate-slide-in-left { animation: slideInLeft 0.5s ease-out forwards; }
+        .animate-slide-in-right { animation: slideInRight 0.5s ease-out forwards; }
+        
+        .typing-dot { animation: pulse 1.4s infinite; }
+        .typing-dot:nth-child(2) { animation-delay: 0.2s; }
+        .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+        @keyframes pulse { 0%, 80%, 100% { transform: scale(0); } 40% { transform: scale(1.0); } }
+        
+        .markdown-content ul { list-style-type: disc; padding-left: 20px; margin-top: 8px; margin-bottom: 8px; }
+        .markdown-content ol { list-style-type: decimal; padding-left: 20px; margin-top: 8px; margin-bottom: 8px; }
+        .markdown-content a { color: var(--brand-teal); text-decoration: underline; }
+        .markdown-content strong, .markdown-content b { font-weight: 600; }
+        .markdown-content p { margin-bottom: 8px; }
+        .markdown-content p:last-child { margin-bottom: 0; }
+
+        .info-link {
+            background-color: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 12px 16px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        .info-link:hover {
+            background-color: rgba(4, 191, 169, 0.1);
+            border-color: var(--brand-teal);
+            transform: translateY(-2px);
+        }
+
+        #particles-js {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -1;
+        }
+    </style>
 </head>
-<body>
+<body class="min-h-screen flex items-center justify-center">
     <div id="particles-js"></div>
-    <div class="overlay"></div>
+    <div class="w-full h-[90vh] max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 relative p-4 lg:p-8">
+        
+        <!-- Left Column: Information -->
+        <aside class="hidden lg:flex flex-col justify-center space-y-6 text-white p-6 bg-slate-800/40 backdrop-blur-lg rounded-2xl border border-[var(--border-color)] overflow-y-auto custom-scrollbar h-full">
+            <header class="text-center">
+                <img src="logo.svg" alt="Pah Venture Logo" class="w-48 mx-auto mb-4">
+                <h1 class="text-3xl font-bold text-white">¡Impulsa tu empresa con IA, nosotros te guiamos!</h1>
+            </header>
 
-    <div class="container">
-        <header class="fade-in-down">
-            <img src="logo.svg" alt="Pah Venture Logo" class="logo"> <!-- Adjusted path -->
-        </header>
-
-        <main>
-            <section class="hero">
-                <h1 class="fade-in-up animation-delay-1">¡Prepárense para la Aventura!</h1>
-                <p class="fade-in-up animation-delay-2">
-                    En Pah Venture estamos construyendo algo innovador y disruptivo.
-                    Nuestro viaje hacia lo desconocido está a punto de comenzar.
+            <section>
+                <h2 class="text-xl font-semibold mb-4 text-[var(--brand-teal)] border-b border-[var(--border-color)] pb-2">Sobre Nosotros</h2>
+                <p class="text-[var(--text-muted)]">
+                    En Pah Venture impulsamos empresas con inteligencia artificial y soluciones innovadoras para tu crecimiento.
                 </p>
+            </section>
 
-                <div id="countdown" class="fade-in-up animation-delay-3">
-                    <div><span id="days">00</span> Días</div>
-                    <div><span id="hours">00</span> Horas</div>
-                    <div><span id="minutes">00</span> Minutos</div>
-                    <div><span id="seconds">00</span> Segundos</div>
-                </div>
-
-                <div class="follow-us fade-in-up animation-delay-4">
-                    <h2>Síguenos para Novedades:</h2>
-                    <div class="social-links-main">
-                        <a href="https://facebook.com/PahVenture" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-                        <a href="https://instagram.com/PahVenture" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                        <a href="https://linkedin.com/company/PahVenture" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a> <!-- Assuming company page for LinkedIn -->
-                        <a href="https://x.com/PahVenture" target="_blank" aria-label="X (Twitter)"><i class="fab fa-x-twitter"></i></a>
-                    </div>
+            <section>
+                <h2 class="text-xl font-semibold mb-4 text-[var(--brand-teal)] border-b border-[var(--border-color)] pb-2">Nuestros Servicios</h2>
+                <div class="space-y-3">
+                    <a href="#" class="info-link flex items-center gap-3" data-message="Háblame sobre sus servicios de consultoría">
+                        <i class="fas fa-lightbulb w-4 text-center text-[var(--brand-teal)]"></i>
+                        <span>Consultoría Estratégica</span>
+                    </a>
+                    <a href="#" class="info-link flex items-center gap-3" data-message="¿Qué tipo de desarrollo de software ofrecen?">
+                        <i class="fas fa-code w-4 text-center text-[var(--brand-teal)]"></i>
+                        <span>Desarrollo de Software</span>
+                    </a>
+                    <a href="#" class="info-link flex items-center gap-3" data-message="Quiero saber más sobre sus soluciones de IA">
+                        <i class="fas fa-brain w-4 text-center text-[var(--brand-teal)]"></i>
+                        <span>Soluciones con IA</span>
+                    </a>
+                    <a href="#" class="info-link flex items-center gap-3" data-message="Soy Gerente y quiero saber más sobre el entrenamiento">
+                        <i class="fas fa-lightbulb w-4 text-center text-[var(--brand-teal)]"></i>
+                        <span>Entrenamiento para Gerentes</span>
+                    </a>
                 </div>
             </section>
-        </main>
 
-        <footer class="fade-in-up animation-delay-5">
-            <p>© <span id="currentYear"></span> Pah Venture. Rompiendo barreras, inspirando innovación.</p>
-            <!-- Social Media Links were moved up into a "Síguenos" section for more prominence -->
-        </footer>
+            <section>
+                <h2 class="text-xl font-semibold mb-4 text-[var(--brand-teal)] border-b border-[var(--border-color)] pb-2">Nuestras Soluciones</h2>
+                <div class="grid grid-cols-4 gap-4 justify-center">
+                    <a href="#" class="info-badge w-20 h-20 mx-auto" data-message="Háblame sobre ChipAgent">
+                        <img src="badge-chipagent.png" alt="ChipAgent Badge" class="w-full h-full object-contain rounded-md transition-transform duration-300 hover:scale-110">
+                    </a>
+                    <a href="#" class="info-badge w-20 h-20 mx-auto" data-message="Háblame sobre ChipCopilot">
+                        <img src="badge-chipcopilot.png" alt="ChipCopilot Badge" class="w-full h-full object-contain rounded-md transition-transform duration-300 hover:scale-110">
+                    </a>
+                    <a href="#" class="info-badge w-20 h-20 mx-auto" data-message="Háblame sobre DevObject">
+                        <img src="badge-devobject.png" alt="DevObject Badge" class="w-full h-full object-contain rounded-md transition-transform duration-300 hover:scale-110">
+                    </a>
+                    <a href="#" class="info-badge w-20 h-20 mx-auto" data-message="Háblame sobre ProdSupport">
+                        <img src="badge-prodsupport.png" alt="ProdSupport Badge" class="w-full h-full object-contain rounded-md transition-transform duration-300 hover:scale-110">
+                    </a>
+                </div>
+            </section>
+        </aside>
+
+        <!-- Right Column: Chat Container -->
+        <div id="chat-container" class="w-full h-full flex flex-col bg-slate-800/50 backdrop-blur-xl rounded-2xl shadow-2xl border border-[var(--border-color)] overflow-hidden">
+            <header class="p-4 bg-black/20 border-b border-[var(--border-color)] flex items-center justify-between gap-4 flex-shrink-0">
+                <div class="flex items-center gap-4">
+                    <div class="w-14 h-14 flex items-center justify-center bg-white rounded-full p-2">
+                        <img src="symbol.svg" alt="Pah Venture Symbol" class="h-full w-full">
+                    </div>
+                    <div>
+                        <h1 class="text-lg font-bold text-[var(--text-light)]">Chip - Asistente Pah Venture</h1>
+                        <p class="text-sm text-green-400 flex items-center gap-1.5">
+                            <span class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
+                            Online
+                        </p>
+                    </div>
+                </div>
+                <div class="flex items-center gap-4">
+                    <a href="https://facebook.com/PahVenture" target="_blank" aria-label="Facebook" class="text-xl text-[var(--text-muted)] hover:text-[var(--brand-teal)] transition-colors"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://instagram.com/PahVenture" target="_blank" aria-label="Instagram" class="text-xl text-[var(--text-muted)] hover:text-[var(--brand-teal)] transition-colors"><i class="fab fa-instagram"></i></a>
+                    <a href="https://linkedin.com/company/PahVenture" target="_blank" aria-label="LinkedIn" class="text-xl text-[var(--text-muted)] hover:text-[var(--brand-teal)] transition-colors"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="https://x.com/PahVenture" target="_blank" aria-label="X (Twitter)" class="text-xl text-[var(--text-muted)] hover:text-[var(--brand-teal)] transition-colors"><i class="fa-brands fa-x-twitter"></i></a>
+                </div>
+            </header>
+
+            <main id="chat-messages" class="flex-1 p-6 overflow-y-auto custom-scrollbar space-y-6">
+                <!-- Messages will be injected here by JavaScript -->
+            </main>
+
+            <footer class="p-4 bg-black/20 border-t border-[var(--border-color)] flex-shrink-0">
+                <form id="chat-form" class="flex items-center gap-3">
+                    <input type="text" id="chat-input" placeholder="Escribe tu mensaje aquí..." autocomplete="off" class="flex-1 bg-slate-900/70 border border-slate-700 rounded-full py-3 px-5 text-[var(--text-light)] placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-[var(--brand-teal)] transition-all duration-300 shadow-inner">
+                    <button type="submit" class="bg-[var(--brand-teal)] hover:bg-[#03a08d] text-white rounded-full p-3 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-[var(--bg-dark)] focus:ring-[var(--brand-teal)] disabled:opacity-50 disabled:cursor-not-allowed">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 24 24" fill="currentColor"><path d="M3.478 2.405a.75.75 0 00-.926.94l2.432 7.905H13.5a.75.75 0 010 1.5H4.984l-2.432 7.905a.75.75 0 00.926.94 60.519 60.519 0 0018.445-8.986.75.75 0 000-1.218A60.517 60.517 0 003.478 2.405z" /></svg>
+                    </button>
+                </form>
+            </footer>
+        </div>
     </div>
+    <footer class="absolute bottom-4 left-1/2 -translate-x-1/2 text-center text-xs text-[var(--text-muted)] bg-[var(--bg-glass)] px-3 py-1 rounded-full backdrop-blur-sm">
+        <p>© <span id="currentYear"></span> Pah Venture. Rompiendo barreras.</p>
+    </footer>
 
     <!-- Particles.js -->
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-    <script src="script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            particlesJS("particles-js", {
+                "particles": {
+                    "number": {
+                        "value": 80,
+                        "density": {
+                            "enable": true,
+                            "value_area": 800
+                        }
+                    },
+                    "color": {
+                        "value": "#04BFA9"
+                    },
+                    "shape": {
+                        "type": "circle",
+                    },
+                    "opacity": {
+                        "value": 0.5,
+                        "random": true,
+                    },
+                    "size": {
+                        "value": 3,
+                        "random": true,
+                    },
+                    "line_linked": {
+                        "enable": true,
+                        "distance": 150,
+                        "color": "#04BFA9",
+                        "opacity": 0.4,
+                        "width": 1
+                    },
+                    "move": {
+                        "enable": true,
+                        "speed": 2,
+                        "direction": "none",
+                        "random": false,
+                        "straight": false,
+                        "out_mode": "out",
+                        "bounce": false,
+                    }
+                },
+                "interactivity": {
+                    "detect_on": "canvas",
+                    "events": {
+                        "onhover": {
+                            "enable": true,
+                            "mode": "repulse"
+                        },
+                        "onclick": {
+                            "enable": true,
+                            "mode": "push"
+                        },
+                        "resize": true
+                    },
+                    "modes": {
+                        "repulse": {
+                            "distance": 100,
+                            "duration": 0.4
+                        },
+                        "push": {
+                            "particles_nb": 4
+                        }
+                    }
+                },
+                "retina_detect": true
+            });
+
+            const API_URL = 'https://n8n.pahventure.com/webhook/8ca51b0a-fbfc-42b0-841e-369868590899/chat';
+            const chatMessages = document.getElementById('chat-messages');
+            const chatForm = document.getElementById('chat-form');
+            const chatInput = document.getElementById('chat-input');
+            const submitButton = chatForm.querySelector('button[type="submit"]');
+            const infoLinks = document.querySelectorAll('.info-link, .info-badge');
+
+            let sessionId = sessionStorage.getItem('pahVentureChatSessionId') || generateSessionId();
+            sessionStorage.setItem('pahVentureChatSessionId', sessionId);
+            
+            document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+            function generateSessionId() {
+                if (window.crypto && typeof window.crypto.randomUUID === 'function') {
+                    return window.crypto.randomUUID();
+                }
+                return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, c => {
+                    const r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+                    return v.toString(16);
+                });
+            }
+
+            function scrollToBottom() {
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }
+
+            function toggleTypingIndicator(show) {
+                let indicator = document.getElementById('typing-indicator');
+                if (show && !indicator) {
+                    const indicatorHTML = `
+                        <div id="typing-indicator" class="flex justify-start animate-slide-in-left">
+                            <div class="flex items-center gap-2 bg-slate-700 text-slate-200 px-4 py-3 rounded-lg rounded-bl-none">
+                                <span class="sr-only">Escribiendo...</span>
+                                <div class="w-2 h-2 bg-slate-400 rounded-full typing-dot"></div>
+                                <div class="w-2 h-2 bg-slate-400 rounded-full typing-dot"></div>
+                                <div class="w-2 h-2 bg-slate-400 rounded-full typing-dot"></div>
+                            </div>
+                        </div>`;
+                    chatMessages.insertAdjacentHTML('beforeend', indicatorHTML);
+                    scrollToBottom();
+                } else if (!show && indicator) {
+                    indicator.remove();
+                }
+            }
+            
+            function addMessageToChat(text, sender) {
+                const isUser = sender === 'user';
+                const alignmentClass = isUser ? 'justify-end' : 'justify-start';
+                const animationClass = isUser ? 'animate-slide-in-right' : 'animate-slide-in-left';
+                const bubbleClasses = isUser 
+                    ? 'bg-[var(--brand-teal)] text-white rounded-br-none'
+                    : 'bg-slate-700 text-slate-200 rounded-bl-none';
+                
+                const content = isUser ? text.replace(/</g, "<").replace(/>/g, ">") : marked.parse(text);
+
+                const messageElement = document.createElement('div');
+                messageElement.className = `flex ${alignmentClass} ${animationClass}`;
+                messageElement.innerHTML = `
+                    <div class="markdown-content ${bubbleClasses} p-3 rounded-lg max-w-lg md:max-w-xl shadow-md">
+                        ${content}
+                    </div>`;
+
+                chatMessages.appendChild(messageElement);
+                scrollToBottom();
+            }
+
+            async function getBotResponse(message) {
+                toggleTypingIndicator(true);
+                chatInput.disabled = true;
+                submitButton.disabled = true;
+
+                try {
+                    const response = await fetch(API_URL, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json', 'Accept': '*/*' },
+                        body: JSON.stringify({ action: 'sendMessage', sessionId, chatInput: message })
+                    });
+
+                    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+
+                    const data = await response.json();
+                    const botMessage = data.output || "Lo siento, no pude procesar tu solicitud.";
+                    
+                    toggleTypingIndicator(false);
+                    addMessageToChat(botMessage, 'bot');
+
+                } catch (error) {
+                    console.error("Error fetching bot response:", error);
+                    toggleTypingIndicator(false);
+                    addMessageToChat("🤖 ¡Ups! Hubo un problema de conexión. Por favor, inténtalo de nuevo.", 'bot');
+                } finally {
+                    chatInput.disabled = false;
+                    submitButton.disabled = false;
+                    chatInput.focus();
+                }
+            }
+            
+            chatForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const userInput = chatInput.value.trim();
+                if (userInput) {
+                    addMessageToChat(userInput, 'user');
+                    getBotResponse(userInput);
+                    chatInput.value = '';
+                }
+            });
+
+            infoLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const message = link.dataset.message;
+                    if (message) {
+                        addMessageToChat(message, 'user');
+                        getBotResponse(message);
+                    }
+                });
+            });
+
+            function initChat() {
+                const welcomeMessage = "¡Hola humano curioso! Soy **Chip**, la demo oficial del asistente IA de Pah Venture 🤖. Pronto podrás tenerme trabajando para tu empresa, pero por ahora, ¡ponme a prueba y descubre todo lo que puedo hacer! ¿Te animas a retarme con tus preguntas sobre nuestros servicios?";
+                setTimeout(() => addMessageToChat(welcomeMessage, 'bot'), 500);
+            }
+
+            initChat();
+        });
+    </script>
+
 </body>
 </html>
