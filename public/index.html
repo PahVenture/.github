@@ -62,7 +62,6 @@
             background-image: linear-gradient(-45deg, #011414, #012323, #044a42, #011414);
             background-size: 400% 400%;
             animation: gradientBG 20s ease infinite;
-            overflow: hidden;
         }
 
         @keyframes gradientBG {
@@ -107,6 +106,24 @@
             transform: translateY(-2px);
         }
 
+        details > summary {
+            list-style: none;
+        }
+        details > summary::-webkit-details-marker {
+            display: none;
+        }
+        summary::after {
+            content: '+';
+            float: right;
+            font-size: 1.5em;
+            line-height: 0;
+            margin-top: 0.25em;
+            transition: transform 0.2s;
+        }
+        details[open] summary::after {
+            transform: rotate(45deg);
+        }
+
         #particles-js {
             position: absolute;
             width: 100%;
@@ -122,7 +139,7 @@
     <div class="w-full h-[90vh] max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8 relative p-4 lg:p-8">
         
         <!-- Left Column: Information -->
-        <aside class="hidden lg:flex flex-col justify-center space-y-6 text-white p-6 bg-slate-800/40 backdrop-blur-lg rounded-2xl border border-[var(--border-color)] overflow-y-auto custom-scrollbar h-full">
+        <aside class="hidden lg:flex flex-col justify-start space-y-6 text-white p-6 bg-slate-800/40 backdrop-blur-lg rounded-2xl border border-[var(--border-color)] overflow-y-auto custom-scrollbar h-full">
             <header class="text-center">
                 <img src="logo.svg" alt="Pah Venture Logo" class="w-48 mx-auto mb-4">
                 <h1 class="text-3xl font-bold text-white">¡Impulsa tu empresa con IA, nosotros te guiamos!</h1>
@@ -172,6 +189,30 @@
                     <a href="#" class="info-badge w-20 h-20 mx-auto" data-message="Háblame sobre ProdSupport">
                         <img src="badge-prodsupport.png" alt="ProdSupport Badge" class="w-full h-full object-contain rounded-md transition-transform duration-300 hover:scale-110">
                     </a>
+                </div>
+            </section>
+
+            <section>
+                <h2 class="text-xl font-semibold mb-4 text-[var(--brand-teal)] border-b border-[var(--border-color)] pb-2">Preguntas Frecuentes</h2>
+                <div class="space-y-3">
+                    <details>
+                        <summary class="info-link cursor-pointer" data-message="¿Qué es la consultoría estratégica de IA?">¿Qué es la consultoría estratégica de IA?</summary>
+                        <p class="text-[var(--text-muted)] pt-2 px-4 pb-4">
+                            Nuestra consultoría estratégica de IA ayuda a las empresas a identificar oportunidades para implementar soluciones de inteligencia artificial, optimizar procesos y desarrollar una hoja de ruta para la transformación digital.
+                        </p>
+                    </details>
+                    <details>
+                        <summary class="info-link cursor-pointer" data-message="¿Qué tipo de software desarrollan?">¿Qué tipo de software desarrollan?</summary>
+                        <p class="text-[var(--text-muted)] pt-2 px-4 pb-4">
+                            Desarrollamos soluciones de software a medida, desde aplicaciones web y móviles hasta sistemas empresariales complejos, utilizando las últimas tecnologías para garantizar la escalabilidad y el rendimiento.
+                        </p>
+                    </details>
+                    <details>
+                        <summary class="info-link cursor-pointer" data-message="¿Cómo pueden las soluciones de IA beneficiar a mi empresa?">¿Cómo pueden las soluciones de IA beneficiar a mi empresa?</summary>
+                        <p class="text-[var(--text-muted)] pt-2 px-4 pb-4">
+                            Nuestras soluciones de IA pueden automatizar tareas repetitivas, proporcionar análisis de datos avanzados para la toma de decisiones, personalizar la experiencia del cliente y optimizar las operaciones para aumentar la eficiencia y la rentabilidad.
+                        </p>
+                    </details>
                 </div>
             </section>
         </aside>

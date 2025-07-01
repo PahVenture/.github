@@ -1,7 +1,18 @@
-# See https://www.robotstxt.org/robotstxt.html for documentation on how to use the robots.txt file
-#
-# To allow all robots to crawl your site, use the following line:
+# Allow all crawlers by default
 User-agent: *
 Disallow:
 
+# Explicitly allow OpenAI's search crawler
+User-agent: OAI-SearchBot
+Allow: /
+
+# Explicitly allow Perplexity's crawler
+User-agent: PerplexityBot
+Allow: /
+
+# Optional: Block AI training but allow search
+User-agent: GPTBot
+Disallow: /
+
+# Reference to sitemap
 Sitemap: https://pahventure.com/sitemap.xml
